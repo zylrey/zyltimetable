@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable Clock</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .clock {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hand {
+            position: absolute;
+            width: 2px;
+            height: 45%;
+            background: black;
+            transform-origin: bottom;
+            transform: rotate(0deg);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .center-circle {
+            width: 40px;
+            height: 40px;
+            background-color: yellow;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: black;
+            font-size: 16px;
+            position: absolute;
+            z-index: 10;
+        }
+
+        /* Timetable Labels */
+        .label {
+            position: absolute;
+            width: 70px;
+            text-align: center;
+            font-size: 12px;
+            color: #333;
+        }
+
+        .label1 { top: 15px; left: 50%; transform: translateX(-50%); }
+        .label2 { top: 70px; right: 15px; }
+        .label3 { top: 150px; right: 0; transform: translateY(-50%); }
+        .label4 { bottom: 70px; right: 15px; }
+        .label5 { bottom: 15px; left: 50%; transform: translateX(-50%); }
+        .label6 { bottom: 70px; left: 15px; }
+        .label7 { top: 150px; left: 0; transform: translateY(-50%); }
+        .label8 { top: 70px; left: 15px; }
+
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="hand" id="hourHand"></div>
+        <div class="center-circle">PLAY</div>
+
+        <!-- Labels for each activity -->
+        <div class="label label1">Sleep Time</div>
+        <div class="label label2">Morning</div>
+        <div class="label label3">Play Games</div>
+        <div class="label label4">Lunch</div>
+        <div class="label label5">Staying Blank</div>
+        <div class="label label6">Watch TV</div>
+        <div class="label label7">Take a Nap</div>
+        <div class="label label8">Meditation</div>
+    </div>
+
+    <script>
+        function setClock() {
+            const now = new Date();
+            const hours = now.getHours();
+
+            const hourHand = document.getElementById('hourHand');
+
+            // Convert hours to degrees (24-hour clock)
+            const hourDegrees = ((hours / 24) * 360) + 90;
+
+            hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+        }
+
+        setInterval(setClock, 1000);
+        setClock();
+    </script>
+</body>
+</html>
